@@ -1,0 +1,90 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+
+function App() {
+  const [page, setPage] = useState("home");
+
+  const products = [
+    { name: "مایع ZIVA 1 لیتری", priceProduction: "385,900", priceConsumer: "467,000" },
+    { name: "مایع ZIVA 3 لیتری", priceProduction: "1,150,000", priceConsumer: "1,400,000" }
+  ];
+
+  const renderPage = () => {
+    switch(page) {
+      case "home":
+        return (
+          <div style={{ textAlign:"center", padding:"60px 20px", background:"#f4f8ff" }}>
+            <h1 style={{ color:"#0b5ed7" }}>مایع چند منظوره ZIVA</h1>
+            <p style={{ maxWidth:"700px", margin:"20px auto", fontSize:"18px" }}>
+              نسل جدید شوینده حرفه‌ای برای ظروف، لباس و سطوح مختلف با قدرت پاک‌کنندگی بالا و رایحه دلنشین.
+            </p>
+            <p style={{ fontWeight:"bold", margin:"10px 0" }}>
+              قیمت تولید: 385,900 تومان | قیمت مصرف‌کننده: 467,000 تومان
+            </p>
+            <a href="tel:09193534928" style={{ display:"inline-block", padding:"14px 30px", background:"#0b5ed7", color:"#fff", borderRadius:"10px", textDecoration:"none", marginTop:"15px" }}>
+              تماس برای سفارش عمده
+            </a>
+          </div>
+        );
+      case "products":
+        return (
+          <div style={{ padding:"50px 20px", textAlign:"center" }}>
+            <h2 style={{ color:"#0b5ed7" }}>محصولات</h2>
+            {products.map((p,i) => (
+              <div key={i} style={{ margin:"20px auto", maxWidth:"400px", padding:"20px", border:"1px solid #ddd", borderRadius:"12px" }}>
+                <h3>{p.name}</h3>
+                <p>قیمت تولید: {p.priceProduction} تومان</p>
+                <p>قیمت مصرف‌کننده: {p.priceConsumer} تومان</p>
+              </div>
+            ))}
+          </div>
+        );
+      case "about":
+        return (
+          <div style={{ padding:"50px 20px", textAlign:"center", background:"#e6f0ff" }}>
+            <h2 style={{ color:"#0b5ed7" }}>درباره ZIVA</h2>
+            <p style={{ maxWidth:"700px", margin:"20px auto", fontSize:"18px" }}>
+              زیوا با فرمولاسیون پیشرفته ترکیبی از قدرت، کیفیت و قیمت رقابتی ارائه می‌دهد.
+              انتخابی هوشمندانه برای پخش‌کنندگان و فروشگاه‌های سراسر کشور.
+            </p>
+          </div>
+        );
+      case "contact":
+        return (
+          <div style={{ padding:"50px 20px", textAlign:"center" }}>
+            <h2 style={{ color:"#0b5ed7" }}>تماس با ما</h2>
+            <p>شماره تماس مستقیم: 09193534928</p>
+            <form style={{ maxWidth:"400px", margin:"20px auto", display:"flex", flexDirection:"column" }}>
+              <input type="text" placeholder="نام شما" style={{ padding:"10px", marginBottom:"10px", borderRadius:"8px", border:"1px solid #ccc" }}/>
+              <input type="text" placeholder="شماره تماس" style={{ padding:"10px", marginBottom:"10px", borderRadius:"8px", border:"1px solid #ccc" }}/>
+              <textarea placeholder="پیام شما" style={{ padding:"10px", marginBottom:"10px", borderRadius:"8px", border:"1px solid #ccc" }} rows="4"></textarea>
+              <button type="submit" style={{ padding:"12px", background:"#0b5ed7", color:"#fff", border:"none", borderRadius:"8px" }}>ارسال پیام</button>
+            </form>
+          </div>
+        );
+      default:
+        return null;
+    }
+  }
+
+  const navStyle = { padding:"15px 30px", background:"#0b5ed7", color:"#fff", position:"sticky", top:0, display:"flex", justifyContent:"center" };
+  const linkStyle = { margin:"0 15px", color:"#fff", cursor:"pointer", textDecoration:"none" };
+
+  return (
+    <div>
+      <nav style={navStyle}>
+        <span style={linkStyle} onClick={()=>setPage("home")}>Home</span>
+        <span style={linkStyle} onClick={()=>setPage("products")}>Products</span>
+        <span style={linkStyle} onClick={()=>setPage("about")}>About</span>
+        <span style={linkStyle} onClick={()=>setPage("contact")}>Contact</span>
+      </nav>
+      {renderPage()}
+      <footer style={{ padding:"30px", fontSize:"14px", color:"#777", textAlign:"center" }}>
+        © 2026 ZIVA Cleaner - تمامی حقوق محفوظ است
+      </footer>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
